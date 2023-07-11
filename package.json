@@ -8,7 +8,7 @@
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && touch out/.nojekyll && git add -f out/ && git commit -m 'deploy to portfolio-pages' && git push && git subtree push --prefix out origin portfolio-pages"
+    "deploy": "next build && next export && touch out/.nojekyll && git add -f out/ && git commit -m 'deploy' && git push && git subtree push --prefix out origin portfolio-pages"
   },
   "dependencies": {
     "@types/node": "20.4.1",
@@ -18,6 +18,7 @@
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "next": "13.4.9",
+    "next-themes": "^0.2.1",
     "postcss": "8.4.25",
     "react": "18.2.0",
     "react-dom": "18.2.0",

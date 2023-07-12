@@ -12,11 +12,11 @@ const Navigation = () => {
                         SonJuHy
                 </Link>
                 <div>
-                    <Link href={"/"}>
-                        test
+                    <Link href={"/"} style={{marginRight:'1rem'}}>
+                        about 
                     </Link>
-                    <Link href={"/"}>
-                        test
+                    <Link href={"/projects"}>
+                        projects 
                     </Link>
                     <ThemeSwitch/>
                 </div>

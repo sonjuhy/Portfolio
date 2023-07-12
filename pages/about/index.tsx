@@ -25,13 +25,12 @@ export default function About() {
                     </div>
                 </div>
                 <div className="flex-shrink-0 lg:mt-12 lg:px-4 mb-10">
-                    <Image
-                        src={'/profile.png'}
-                        alt="Profile"
-                        priority={true}
-                        className="rounded-full"
+                    <img
+                        alt="profile"
+                        src={`${prefix}/../profile.png`}
                         width={250}
                         height={250}
+                        className="rounded-full"
                     />
                 </div>
             </div>

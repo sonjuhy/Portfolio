@@ -24,7 +24,7 @@ export default function About() {
                         </p>
                     </div>
                 </div>
-                <div className="flex-shrink-0 lg:mt-12 lg:px-4 mb-10">
+                <div className="flex-shrink-0 lg:mt-12 lg:px-4 mb-10" style={{margin:'auto'}}>
                     <img
                         alt="profile"
                         src={`${prefix}/../profile.png`}

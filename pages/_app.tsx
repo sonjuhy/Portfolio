@@ -12,7 +12,7 @@ import { ThemeProvider } from 'next-themes'
 export default function App({ Component, pageProps }: AppProps) {
   return <PortfolioProvider value={{prefix}}>
     <ThemeProvider attribute='class' enableSystem={false}>
-      <Navigation/>
+      {/* <Navigation/> */}
       <Component {...pageProps} />
       <Footer/>
     </ThemeProvider>

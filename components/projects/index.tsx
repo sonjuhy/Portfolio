@@ -2,18 +2,18 @@ import React from "react"
 
 import PortfolioContext from '../../context/context'
 import { useContext } from 'react'
-import Head from "next/head";
 
 import MyHomeVer1 from './myhomeVer1'
+import MyHomeVer2 from './myhomeVer2'
+import OctopUs from './octopUs'
+import Detective from './detective'
+import Gagesajang from './gagesajang'
+import Link from "next/link";
 
 export default function Projects() {
     const prefix = useContext(PortfolioContext);
     return (
         <div>
-            <Head>
-                <title>Sonjuhy Portfolio</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
             <div className="max-w-4xl mx-auto mt-16 antialiased">
                 <div className="container px-4 mx-auto">
                     <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">
@@ -24,25 +24,30 @@ export default function Projects() {
                             <div className="mt-6 text-gray-800 dark:text-white">
                                 <p className="mb-4">
                                     This page is introduced to you about my projects.
-                                    
+                                    Click on each project to navigate to its GitHub repository.
                                 </p>
                                 <p className="mb-4">
                                     Please enjoy my project Portfolio.
                                 </p>
                             </div>
                         </div>
-                        <div className="flex-shrink-0 lg:mt-12 lg:px-4 mb-10">
-                            <img
-                                alt="profile"
-                                src={`${prefix}/../../profile.png`}
-                                width={250}
-                                height={250}
-                                className="rounded-full"
-                            />
-                        </div>
                     </div>
                 </div>
-                <MyHomeVer1/>
+                <Link href="https://github.com/sonjuhy/MyHome_Open">
+                    <MyHomeVer1/>
+                </Link>
+                <Link href="https://github.com/sonjuhy/MyHomeSpring">
+                    <MyHomeVer2/>
+                </Link>
+                <Link href="https://github.com/sonjuhy/GaGeSaJang">
+                    <Gagesajang/>
+                </Link>
+                <Link href="https://github.com/sonjuhy/Octop-Us">
+                    <OctopUs/>
+                </Link>
+                <Link href="https://github.com/sonjuhy/Detective">
+                    <Detective/>
+                </Link>
             </div>
         </div>
     )

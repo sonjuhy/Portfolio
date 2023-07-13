@@ -10,11 +10,13 @@ import Footer from '@/components/footer'
 import { ThemeProvider } from 'next-themes'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <PortfolioProvider value={{prefix}}>
+  return <div className='bg-white dark:bg-black' style={{height:'100vh'}}>
+    <PortfolioProvider value={{prefix}}>
     <ThemeProvider attribute='class' enableSystem={false}>
       {/* <Navigation/> */}
       <Component {...pageProps} />
       <Footer/>
     </ThemeProvider>
     </PortfolioProvider>
+    </div>
 }

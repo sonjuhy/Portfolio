@@ -4,8 +4,12 @@ import PortfolioContext from '../../context/context'
 import { useContext } from 'react'
 import Head from "next/head";
 
-export default function Projects() {
-    const prefix = useContext(PortfolioContext);
+type props = {
+    prefix: any,
+}
+
+export default function Projects({prefix}:props) {
+    
     return (
         <div className="max-w-4xl mx-auto mt-16 antialiased">
             <div className="container px-4 mx-auto">

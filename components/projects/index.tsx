@@ -10,8 +10,11 @@ import Detective from './detective'
 import Gagesajang from './gagesajang'
 import Link from "next/link";
 
-export default function Projects() {
-    const prefix = useContext(PortfolioContext);
+type props = {
+    prefix: any,
+}
+
+export default function Projects({prefix}:props) {
     return (
         <div>
             <div className="max-w-4xl mx-auto mt-16 antialiased">
@@ -34,19 +37,19 @@ export default function Projects() {
                     </div>
                 </div>
                 <Link href="https://github.com/sonjuhy/MyHome_Open">
-                    <MyHomeVer1/>
+                    <MyHomeVer1 prefix={prefix}/>
                 </Link>
                 <Link href="https://github.com/sonjuhy/MyHomeSpring">
-                    <MyHomeVer2/>
+                    <MyHomeVer2 prefix={prefix}/>
                 </Link>
                 <Link href="https://github.com/sonjuhy/GaGeSaJang">
-                    <Gagesajang/>
+                    <Gagesajang prefix={prefix}/>
                 </Link>
                 <Link href="https://github.com/sonjuhy/Octop-Us">
-                    <OctopUs/>
+                    <OctopUs prefix={prefix}/>
                 </Link>
                 <Link href="https://github.com/sonjuhy/Detective">
-                    <Detective/>
+                    <Detective prefix={prefix}/>
                 </Link>
             </div>
         </div>

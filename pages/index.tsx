@@ -15,9 +15,9 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const {prefix} = useContext(PortfolioContext);
   const [selected, setSelected] = useState('main');
-
+  console.log(prefix);
   return (
-    <div>
+    <div className='bg-white dark:bg-black'>
       <Head>
         <title>Sonjuhy Portfolio</title>
         <link rel="icon" href={`${prefix}/favicon.ico`} />
@@ -31,7 +31,7 @@ export default function Home() {
             <Button variant='link' onClick={()=>setSelected('main')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white"} style={{marginRight:'1rem'}}>
                 about 
             </Button>
-            <Button variant='link' onClick={()=>setSelected('projects')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white"}>
+            <Button variant='link' onClick={()=>setSelected('projects')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white"} style={{marginRight:'1rem'}}>
                 projects 
             </Button>
             <ThemeSwitch/>
@@ -43,9 +43,11 @@ export default function Home() {
           <About/>
         )}
         {selected === 'projects' && (
-          <Project/>
+          <Project prefix={prefix}/>
         )}
+        <br/>
       </div>
+      <br/>
     </div>
   )
 }

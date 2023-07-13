@@ -4,8 +4,12 @@ import PortfolioContext from '../../context/context'
 import { useContext } from 'react'
 import Head from "next/head";
 
-export default function Projects() {
-    const prefix = useContext(PortfolioContext);
+type props = {
+    prefix: any,
+}
+
+export default function Projects({prefix}:props) {
+    
     return (
         <div className="max-w-4xl mx-auto mt-16 antialiased">
             <div className="container px-4 mx-auto">
@@ -17,7 +21,7 @@ export default function Projects() {
                         <div className="mt-6 text-gray-800 dark:text-white">
                             <p className="mb-4">
                                 It is an Android mystery game using AI based on image detection. When proceeding with the story, the necessary clues are acquired through photography and transmission.
-                                I've added the web to my approach compared to existing projects, implemented the backend completely, and refactored Android.
+                                I&apos;ve added the web to my approach compared to existing projects, implemented the backend completely, and refactored Android.
                             </p>
                             <p className="mb-4">
                                 Please enjoy my project Portfolio to click this Component.

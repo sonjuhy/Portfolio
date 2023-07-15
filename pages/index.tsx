@@ -1,21 +1,21 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import PortfolioContext from '@/context/context'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import Head from 'next/head'
 
 import About from './about'
 import Project from '../components/projects'
 
 import ThemeSwitch from '@/modules/themeSwitch'
-import { Button } from 'react-bootstrap'
+import { Button, Overlay, Tooltip } from 'react-bootstrap'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const {prefix} = useContext(PortfolioContext);
   const [selected, setSelected] = useState('main');
-  console.log(prefix);
+  const [language, setLanguage] = useState(false); // false : eng, true : kor
+
   return (
     <div className='bg-white dark:bg-black'>
       <Head>
@@ -34,16 +34,20 @@ export default function Home() {
             <Button variant='link' onClick={()=>setSelected('projects')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white"} style={{marginRight:'1rem'}}>
                 projects 
             </Button>
+            <Button variant='link' onClick={()=>setLanguage(!language)} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white"} style={{marginRight:'1rem'}}>
+              {language && ('한')}
+              {!language && ('Eng')}
+            </Button>
             <ThemeSwitch/>
           </div>
         </div>
       </div>
       <div className="max-w-4xl mx-auto mt-16 antialiased">
         {selected === 'main' && (
-          <About/>
+          <About language={language}/>
         )}
         {selected === 'projects' && (
-          <Project prefix={prefix}/>
+          <Project language={language} prefix={'https://sonjuhy.github.io/Portfolio'}/>
         )}
         <br/>
       </div>

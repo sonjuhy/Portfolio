@@ -13,12 +13,12 @@ export default function About({language}:props) {
                 <div className="lg:px-4 lg:mt-12 ">
                     {language && (
                         <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
-                            안녕하세요. 환영합니다!
+                            환영합니다!
                         </h1>
                     )}
                     {!language && (
                         <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
-                            Hello. Welcome!
+                            Welcome!
                         </h1>
                     )}
                     <div className="mt-6 text-gray-800 dark:text-white">
@@ -31,6 +31,10 @@ export default function About({language}:props) {
                                 <p className="mb-4">
                                     그동안 제가 배우고 개발한 내용들을 즐겁게 둘러보는 시간이 되시길 바랍니다.
                                 </p>
+                                <br/>
+                                <p className="mb-4">
+                                    If you want to see this site in English, press the button at the top that says 한.
+                                </p>
                             </div>
                         )}
                         {!language && (
@@ -41,6 +45,10 @@ export default function About({language}:props) {
                             </p>
                             <p className="mb-4">
                                 I hope it will be a time to check what kind of things I have developed and studied.
+                            </p>
+                            <br/>
+                            <p className="mb-4">
+                                만약 한글로 사이트를 보고싶으시다면, 상단에 ENG 이라고 적힌 버튼을 눌러주세요.
                             </p>
                         </div>
                         )}

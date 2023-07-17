@@ -24,12 +24,12 @@ export default function Projects({prefix, language}:props) {
                         <div className="lg:px-4 lg:mt-12 ">
                             {language && (
                                 <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
-                                    안녕하세요. 환영합니다!
+                                    환영합니다!
                                 </h1>
                             )}
                             {!language && (
                                 <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
-                                    Hello. Welcome!
+                                    Welcome!
                                 </h1>
                             )}
                             <div className="mt-6 text-gray-800 dark:text-white">
@@ -60,19 +60,19 @@ export default function Projects({prefix, language}:props) {
                         </div>
                     </div>
                 </div>
-                <Link href="https://github.com/sonjuhy/MyHome_Open">
+                <Link href="https://github.com/sonjuhy/MyHomeVer1" target="_blank">
                     <MyHomeVer1 prefix={prefix} language={language}/>
                 </Link>
-                <Link href="https://github.com/sonjuhy/MyHomeSpring">
+                <Link href="https://github.com/sonjuhy/MyHomeVer2" target="_blank">
                     <MyHomeVer2 prefix={prefix} language={language}/>
                 </Link>
-                <Link href="https://github.com/sonjuhy/GaGeSaJang">
+                <Link href="https://github.com/sonjuhy/GaGeSaJang" target="_blank">
                     <Gagesajang prefix={prefix} language={language}/>
                 </Link>
-                <Link href="https://github.com/sonjuhy/Octop-Us">
+                <Link href="https://github.com/sonjuhy/Octop-Us" target="_blank">
                     <OctopUs prefix={prefix} language={language}/>
                 </Link>
-                <Link href="https://github.com/sonjuhy/Detective">
+                <Link href="https://github.com/sonjuhy/Detective" target="_blank">
                     <Detective prefix={prefix} language={language}/>
                 </Link>
             </div>

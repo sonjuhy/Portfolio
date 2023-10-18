@@ -8,6 +8,7 @@ import MyHomeVer2 from './myhomeVer2'
 import OctopUs from './octopUs'
 import Detective from './detective'
 import Gagesajang from './gagesajang'
+import Study from './study'
 import Link from "next/link";
 
 type props = {
@@ -74,6 +75,9 @@ export default function Projects({prefix, language}:props) {
                 </Link>
                 <Link href="https://github.com/sonjuhy/Detective" target="_blank">
                     <Detective prefix={prefix} language={language}/>
+                </Link>
+                <Link href="https://github.com/sonjuhy/CSPersonalStudy" target="_blank">
+                    <Study prefix={prefix} language={language}/>
                 </Link>
             </div>
         </div>

@@ -1,38 +1,143 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **NextJS를 이용한 github 페이지 배포**   
+<br/>
 
-## Getting Started
+## **Next JS 설정**
 
-First, run the development server:
+### package-json 수정
+* scripts 내부에 deploy 추가   
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+#### package-json
+```json
+"deploy": "next build && next export && touch out/.nojekyll && git add -f out/ && git commit -m 'deploy' && git subtree push --prefix out origin portfolio-pages"
+```
+***
+
+### next.config.js 수정
+* 이미지, repository 정보 등 추가   
+#### next.config.js 
+```javascript
+/** @type {import('next').NextConfig} */
+const debug = process.env.NODE_ENV !== "production";
+const repository = "Portfolio"
+
+const nextConfig = {
+  reactStrictMode: true,   
+  assetPrefix: !debug ? `/${repository}/` : "", // production 일때 prefix 경로   
+  trailingSlash: true, // 빌드 시 폴더 구조 그대로 생성하도록   
+  images:{   
+    path: '/',   
+    loader: 'imgix',   
+  },   
+
+  mode: 'jit',   
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],   
+  darkMode: 'class', // or 'media' or 'class'   
+  theme: {   
+    extend: {},   
+  },   
+  variants: {   
+    extend: {},   
+  },   
+  plugins: [],   
+}   
+
+module.exports = nextConfig
+```
+***
+
+### config.js 추가
+이 프로젝트 기준 예시 코드
+
+#### context.js   
+```javascript
+export const prefix =
+  process.env.NODE_ENV === "production"
+    ? "https://sonjuhy.github.io/Portfolio"
+    : "";
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+***
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### context.js 추가
+context.js 에서 prefix를 가져와 추가
+#### contest.js
+```javascript
+import React from "react";
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+const PortfolioContext = React.createContext();
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+export const PortfolioProvider = PortfolioContext.Provider;
+export const PortfolioConsumer = PortfolioContext.Consumer;
 
-## Learn More
+export default PortfolioContext;
+```
 
-To learn more about Next.js, take a look at the following resources:
+***
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### _app.tsx 수정
 
-## Deploy on Vercel
+```javascript
+import '@/styles/globals.css'
+import type { AppProps } from 'next/app'
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+import { PortfolioProvider } from '@/context/context'
+import { prefix } from '@/config/config'
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+import 'tailwindcss/tailwind.css'
+import Navigation from '@/components/navigation'
+import Footer from '@/components/footer'
+import { ThemeProvider } from 'next-themes'
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <div className='bg-white dark:bg-black' style={{height:'100vh'}}>
+    <PortfolioProvider value={{prefix}}> // 여기를 이렇게 감싸야 함.
+    <ThemeProvider attribute='class' enableSystem={false}>
+      {/* <Navigation/> */}
+      <Component {...pageProps} />
+      <Footer/>
+    </ThemeProvider>
+    </PortfolioProvider>
+    </div>
+}
+```
+
+***
+
+
+### image 사용시 주의
+prefix를 이용하여 링크를 걸어줘야 경로를 잘 찾아 이미지를 표시해준다.
+
+#### 예시
+```javascript
+const prefix='https://sonjuhy.github.io/Portfolio'
+...
+<img
+    alt="profile"
+    src={`${prefix}/image/MyhomeIcon.png`}
+    width={250}
+    height={250}
+    className="rounded-full"
+/>
+```
+
+***
+
+
+### 배포 방법
+터미널에서 아래와 같이 명령어 입력
+```bash
+npm run deploy
+```
+
+***
+
+
+#### 수정 후 배포 방법
+기존 배포 방법과 동일하다.  
+터미널에서 아래와 같이 명령어 입력
+```bash
+npm run deploy
+```
+***

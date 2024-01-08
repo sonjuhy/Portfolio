@@ -9,6 +9,8 @@ import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
 import { ThemeProvider } from 'next-themes'
 
+import 'react-notion-x/src/styles.css'
+
 export default function App({ Component, pageProps }: AppProps) {
   return <div className='bg-white dark:bg-black' style={{height:'100vh'}}>
     <PortfolioProvider value={{prefix}}>

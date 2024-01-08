@@ -12,6 +12,8 @@ import { Button, Overlay, Tooltip } from 'react-bootstrap'
 
 const inter = Inter({ subsets: ['latin'] })
 
+import Link from 'next/link'
+
 export default function Home() {
   const {prefix} = useContext(PortfolioContext);
   const [selected, setSelected] = useState('main');
@@ -36,6 +38,9 @@ export default function Home() {
             <Button variant='link' onClick={()=>setSelected('about')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white " + (selected === 'about' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>
                 about 
             </Button>
+            <Link href={"/portfolio"} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white " + (selected === 'portfolio' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>
+                portfolio 
+            </Link>
             <Button variant='link' onClick={()=>setSelected('projects')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white " + (selected === 'projects' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>
                 projects 
             </Button>
@@ -53,6 +58,11 @@ export default function Home() {
         )}
         {selected === 'about' && (
           <About language={language}/>
+        )}
+        {selected === 'portfolio' && (
+          // <Portfolio language={language} recordMap={recordMap}/>
+          // <Portfolio language={language} recordMap={recordMap}/>
+          <div></div>
         )}
         {selected === 'projects' && (
           <Project language={language} prefix={'https://sonjuhy.github.io/Portfolio'}/>

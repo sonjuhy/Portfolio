@@ -9,8 +9,8 @@ export default function CareerCard({language}:props) {
     <>
       <div className="flex flex-wrap" style={{marginTop:'1rem'}}>
         <div className="w-full">
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded dark:bg-black dark:shadow-white">
-            <div className="px-4 py-5 flex-auto dark:text-white text-left">
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+            <div className="px-4 py-5 flex-auto   text-left">
                 {language && (
                     <div>
                         <p className="mb-4 text-lg">
@@ -55,8 +55,8 @@ export default function CareerCard({language}:props) {
       </div>
       <div className="flex flex-wrap" style={{marginTop:'1rem'}}>
         <div className="w-full">
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded dark:bg-black dark:shadow-white">
-            <div className="px-4 py-5 flex-auto dark:text-white text-left">
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded  ">
+            <div className="px-4 py-5 flex-auto   text-left">
                 {language && (
                     <div>
                         <p className="mb-4 text-lg">

@@ -22,7 +22,6 @@ const DynamicPage = ({ result, recordMap }:any) => {
   const {prefix} = useContext(PortfolioContext);
   const [selected, setSelected] = useState('');
   const [language, setLanguage] = useState(false);
-  console.log(result);
 
   // 페이지 내용 렌더링
   return (
@@ -35,13 +34,16 @@ const DynamicPage = ({ result, recordMap }:any) => {
         <meta property="og:description" content="Development History Store" />
         <meta property="og:type" content="website" />
       </Head>
-      <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6 dark:bg-black">
+      <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6 ">
         <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
-          <Link href={'/'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white " + (selected === 'main' ? 'text-sky-500' : '')}>
+          <Link href={'/'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  " + (selected === 'main' ? 'text-sky-500' : '')}>
               SonJuHy
           </Link>
-          <div>
-            <Button variant='link' onClick={()=>setLanguage(!language)} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white"} style={{marginRight:'1rem'}}>
+          <div className='text-xs'>
+            <Link href={'/'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  " + (selected === 'main' ? 'text-sky-500' : '')}  style={{marginRight:'1rem'}}>
+                Home
+            </Link>
+            <Button variant='link' onClick={()=>setLanguage(!language)} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
               {language && ('한')}
               {!language && ('Eng')}
             </Button>
@@ -51,71 +53,89 @@ const DynamicPage = ({ result, recordMap }:any) => {
       <div className="flex flex-wrap">
         <div className="max-w-4xl mx-auto mt-16 antialiased">
           <div className="container px-4 mx-auto">
-              <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">
-                  <div className="lg:px-4 lg:mt-12 ">
-                      {language && (
-                          <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
-                              환영합니다!
-                          </h1>
-                      )}
-                      {!language && (
-                          <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
-                              Welcome!
-                          </h1>
-                      )}
-                      <div className="mt-6 text-gray-800 dark:text-white">
-                          {language && (
-                              <div>
-                                  <p className="mb-4">
-                                      제가 개발한 프로젝트를 소개하는 페이지 입니다.
-                                      프로젝트를 클릭시, 해당 프로젝트의 깃허브로 이동합니다.
+            <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">
+                <div className="lg:px-4 lg:mt-12 ">
+                    {language && (
+                        <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl  ">
+                            환영합니다!
+                        </h1>
+                    )}
+                    {!language && (
+                        <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl  ">
+                            Welcome!
+                        </h1>
+                    )}
+                    <div className="mt-6 text-gray-800  ">
+                        {language && (
+                            <div>
+                                <div className="mb-4">
+                                  <p>
+                                    저의 개발 기록들을 모아둔 포트폴리오를 소개하는 페이지 입니다.
                                   </p>
-                                  <p className="mb-4">
-                                      제 프로젝트 포토폴리오를 즐겨주시기 바랍니다.
+                                  <p>
+                                    포트폴리오를 클릭시, 해당 포트폴리오가 표시됩니다.
                                   </p>
-                              </div>
-                          )}
-                          {!language && (
-                              <div>
-                                  <p className="mb-4">
-                                      This page is introduced to you about my projects.
-                                      Click on each project to navigate to its GitHub repository.
+                                </div>
+                                <p className="mb-4">
+                                    제 포토폴리오를 즐겨주시기 바랍니다.
+                                </p>
+                                <p className="mb-4">
+                                    메인으로 다시 돌아오시려면 [BACK TO MAIN] 을 클릭해주시기 바랍니다.
+                                </p>
+                            </div>
+                        )}
+                        {!language && (
+                            <div>
+                                <div className="mb-4">
+                                  <p>
+                                    This is a page that introduces the portfolio that collects my development records.
                                   </p>
-                                  <p className="mb-4">
-                                      Please enjoy my project Portfolio.
+                                  <p>
+                                    When you click on a portfolio, that portfolio is displayed.
                                   </p>
-                              </div>
-                          )}
-                          
-                      </div>
-                  </div>
-              </div>
-              {result && (
-                <div>
-                    <Link href={'/portfolio-default'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white "} style={{marginRight:'1rem'}}>
-                        <MainPortfolio/>
-                    </Link>
-                    <Link href={'/portfolio-sequence'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white "} style={{marginRight:'1rem'}}>
-                        <MyHomeSequencePortfolio/>
-                    </Link>
+                                </div>
+                                <p className="mb-4">
+                                    Please enjoy my Portfolio.
+                                </p>
+                                <p className="mb-4">
+                                    To return to the main, please click [BACK TO MAIN].
+                                </p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-              )}
-              {!result &&(
-                <div>
-                  <Link href={'/portfolio'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white "} style={{marginRight:'1rem', marginLeft:'3rem'}}>
-                      [Back to Main]
+            </div>
+            {result && (
+              <div>
+                  <Link href={'/portfolio-default'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
+                      <MainPortfolio language={language}/>
                   </Link>
+                  <Link href={'/portfolio-sequence'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
+                      <MyHomeSequencePortfolio language={language}/>
+                  </Link>
+              </div>
+            )}
+            {!result &&(
+              <div>
+                <hr/>
+                <br/>
+                <Link href={'/portfolio'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem', marginLeft:'1rem'}}>
+                    [Back to Main]
+                </Link>
+                <div >
                   <NotionRenderer 
                       recordMap={recordMap} 
                       fullPage={true} 
                       darkMode={false}
+                      disableHeader={true}
                       components={{
                         Collection,
                         Modal,
                         nextImage: Image
                       }}/>
                 </div>
-              )}
+              </div>
+            )}
           </div>
         </div>
       </div>

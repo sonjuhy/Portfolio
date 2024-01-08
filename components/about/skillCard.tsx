@@ -20,8 +20,8 @@ export default function SkillCard({language}:props) {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 1
-                    ? "text-cyan-500 bg-blueGray-600 dark:bg-black dark:border-cyan-400 dark:border"
-                    : "text-blueGray-600 bg-white dark:bg-black dark:text-white dark:border-white dark:border")
+                    ? "text-cyan-500 bg-blueGray-600 "
+                    : "text-blueGray-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -40,8 +40,8 @@ export default function SkillCard({language}:props) {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 2
-                    ? "text-cyan-500 bg-blueGray-600 dark:bg-black dark:border-cyan-400 dark:border"
-                    : "text-blueGray-600 bg-white dark:bg-black dark:text-white dark:border-white dark:border")
+                    ? "text-cyan-500 bg-blueGray-600"
+                    : "text-blueGray-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -60,8 +60,8 @@ export default function SkillCard({language}:props) {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 3
-                    ? "text-cyan-500 bg-blueGray-600 dark:bg-black dark:border-cyan-400 dark:border"
-                    : "text-blueGray-600 bg-white dark:bg-black dark:text-white dark:border-white dark:border")
+                    ? "text-cyan-500 bg-blueGray-600"
+                    : "text-blueGray-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -80,8 +80,8 @@ export default function SkillCard({language}:props) {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 4
-                    ? "text-cyan-500 bg-blueGray-600 dark:bg-black dark:border-cyan-400 dark:border"
-                    : "text-blueGray-600 bg-white dark:bg-black dark:text-white dark:border-white dark:border")
+                    ? "text-cyan-500 bg-blueGray-600"
+                    : "text-blueGray-600 bg-white ")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -96,11 +96,11 @@ export default function SkillCard({language}:props) {
               </a>
             </li>
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded dark:bg-black dark:shadow-white">
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                    <div className="grid grid-cols-2 dark:text-white text-left">
+                    <div className="grid grid-cols-2   text-left">
                         <div>
                             <p>⦁ JAVA</p>
                             <p>⦁ Ubuntu</p>
@@ -117,7 +117,7 @@ export default function SkillCard({language}:props) {
                     </div>
                 </div>
                 <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                    <div className="grid grid-cols-2 dark:text-white text-left">
+                    <div className="grid grid-cols-2   text-left">
                         <div>
                             <p>⦁ Python</p>
                             <p>⦁ WebRTC</p>
@@ -138,7 +138,7 @@ export default function SkillCard({language}:props) {
                     </div>
                 </div>
                 <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                    <div className="grid grid-cols-2 dark:text-white text-left">
+                    <div className="grid grid-cols-2   text-left">
                         <div>
                             <p>⦁ React Native</p>
                             <p>⦁ Yolo V5</p>
@@ -150,7 +150,7 @@ export default function SkillCard({language}:props) {
                     </div>
                 </div>
                 <div className={openTab === 4 ? "block" : "hidden"} id="link4">
-                    <div className="grid grid-cols-2 dark:text-white text-left">
+                    <div className="grid grid-cols-2   text-left">
                         <div>
                             <p>⦁ Eclipse</p>
                             <p>⦁ Android Studio</p>

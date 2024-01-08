@@ -12,13 +12,10 @@ import { ThemeProvider } from 'next-themes'
 import 'react-notion-x/src/styles.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <div className='bg-white dark:bg-black' style={{height:'100vh'}}>
+  return <div className='bg-white' style={{height:'100vh'}}>
     <PortfolioProvider value={{prefix}}>
-    <ThemeProvider attribute='class' enableSystem={false}>
-      {/* <Navigation/> */}
       <Component {...pageProps} />
       <Footer/>
-    </ThemeProvider>
     </PortfolioProvider>
     </div>
 }

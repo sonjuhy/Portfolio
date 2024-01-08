@@ -13,16 +13,16 @@ export default function Projects({prefix, language}:props) {
                 <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">
                     <div className="lg:px-4 lg:mt-12 ">
                         {language && (
-                            <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
+                            <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl ">
                                 기초 공부
                             </h1>
                         )}
                         {!language && (
-                            <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl dark:text-white">
+                            <h1 className="text-2xl font-bold text-gray-900 lg:text-5xl ">
                                 Basic Study
                             </h1>
                         )}
-                        <div className="mt-6 text-gray-800 dark:text-white">
+                        <div className="mt-6 text-gray-800 ">
                             {language && (
                                 <div>
                                     <p className="mb-4">

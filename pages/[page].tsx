@@ -18,11 +18,17 @@ import Link from "next/link";
 
 import notion from '@/modules/notion'
 
-const DynamicPage = ({ result, recordMap }:any) => {
+const DynamicPage = ({ result, page, recordMap }:any) => {
   const {prefix} = useContext(PortfolioContext);
   const [selected, setSelected] = useState('');
   const [language, setLanguage] = useState(false);
 
+  console.log(page);
+
+  const myUrlPage = (pageId:string) => {
+    
+    return `/Portfolio/${pageId.replace(/-/g, '')}`;
+  };
   // 페이지 내용 렌더링
   return (
     <div>
@@ -36,11 +42,11 @@ const DynamicPage = ({ result, recordMap }:any) => {
       </Head>
       <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6 ">
         <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
-          <Link href={'/'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  " + (selected === 'main' ? 'text-sky-500' : '')}>
+          <Link href={'/Portfolio'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  " + (selected === 'main' ? 'text-sky-500' : '')}>
               SonJuHy
           </Link>
           <div className='text-xs'>
-            <Link href={'/'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  " + (selected === 'main' ? 'text-sky-500' : '')}  style={{marginRight:'1rem'}}>
+            <Link href={'/Portfolio'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  " + (selected === 'main' ? 'text-sky-500' : '')}  style={{marginRight:'1rem'}}>
                 Home
             </Link>
             <Button variant='link' onClick={()=>setLanguage(!language)} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
@@ -107,10 +113,10 @@ const DynamicPage = ({ result, recordMap }:any) => {
             </div>
             {result && (
               <div>
-                  <Link href={'/portfolio-default'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
+                  <Link href={'/Portfolio/portfolio-default'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
                       <MainPortfolio language={language}/>
                   </Link>
-                  <Link href={'/portfolio-sequence'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
+                  <Link href={'/Portfolio/portfolio-sequence'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem'}}>
                       <MyHomeSequencePortfolio language={language}/>
                   </Link>
               </div>
@@ -119,19 +125,21 @@ const DynamicPage = ({ result, recordMap }:any) => {
               <div>
                 <hr/>
                 <br/>
-                <Link href={'/portfolio'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem', marginLeft:'1rem'}}>
+                <Link href={'/Portfolio/portfolioPage'} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "} style={{marginRight:'1rem', marginLeft:'1rem'}}>
                     [Back to Main]
                 </Link>
                 <div >
                   <NotionRenderer 
                       recordMap={recordMap} 
                       fullPage={true} 
+                      mapPageUrl={myUrlPage}
                       darkMode={false}
                       disableHeader={true}
                       components={{
                         Collection,
                         Modal,
-                        nextImage: Image
+                        nextImage: Image,
+                        nextLink: Link
                       }}/>
                 </div>
               </div>
@@ -147,7 +155,7 @@ const DynamicPage = ({ result, recordMap }:any) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   // 여기서는 간단한 예시로 두 가지 경로를 정의합니다.
   const paths = [
-    { params: { page: 'portfolio' } },
+    { params: { page: 'portfolioPage' } },
     { params: { page: 'portfolio-sequence'}},
     { params: { page: 'portfolio-default' } },
     { params: { page: 'portfolio-MyHomeMain' } },
@@ -209,7 +217,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   // 여기에서 데이터를 불러와야 합니다.
-  const result = page === 'portfolio' ? true : false;
+  const result = page === 'portfolioPage' ? true : false;
   var recordMap = null;
   if(!result){
     recordMap = await notion.getPage(pageNum);
@@ -219,6 +227,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       result,
+      page,
       recordMap
     },
   };

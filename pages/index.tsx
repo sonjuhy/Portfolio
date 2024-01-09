@@ -38,7 +38,7 @@ export default function Home() {
             <Button variant='link' onClick={()=>setSelected('about')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " + (selected === 'about' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>
                 about 
             </Button>
-            <Link href={"/portfolio"} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " + (selected === 'portfolio' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>
+            <Link href={"/Portfolio/portfolioPage"} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " + (selected === 'portfolio' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>
                 portfolio 
             </Link>
             <Button variant='link' onClick={()=>setSelected('projects')} className={"font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " + (selected === 'projects' ? 'text-sky-500' : '')} style={{marginRight:'1rem'}}>

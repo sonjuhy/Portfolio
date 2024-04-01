@@ -11,21 +11,53 @@ import {
   ListItemAvatar,
   Avatar,
   Collapse,
+  useTheme,
 } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
-import { useAppSelector } from "@/context/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/context/redux/hooks";
+import { changeLanguageMode } from "@/context/redux/feature/languageType/languageSlice";
+import { changeDarkMode } from "@/context/redux/feature/pageSize/pageSlice";
+import { grey } from "@mui/material/colors";
 
-const MainAside = () => {
+import theme from "@/customTheme";
+
+const ColorModeContext = createContext({ toggleColorMode: () => {} });
+
+interface AsideProps {
+  toggleDarkMode: () => void;
+}
+const MainAside = ({ toggleDarkMode }: AsideProps) => {
   const { prefix }: any = useContext(PortfolioContext);
+  const greyColor = grey[900];
   const smallMode = useAppSelector((state) => state.page.smallMode);
   const darkMode = useAppSelector((state) => state.page.darkMode);
   const fontSize = smallMode ? 18 : 32;
+
+  const dispatch = useAppDispatch();
+  const languageType = useAppSelector((state) => state.language.type);
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   const [listOpen, setListOpen] = useState(smallMode ? false : true);
   const moveToUrl = (url: string) => {
     window.open(url);
   };
+
+  const changeLanguage = () => {
+    dispatch(changeLanguageMode(!languageType));
+  };
+  const changeLocalDarkMode = () => {
+    dispatch(changeDarkMode(!darkMode));
+    toggleDarkMode();
+  };
+  const changeColorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {},
+    }),
+    []
+  );
+
   return (
     <div style={{ padding: "1rem", marginTop: "3.9rem" }}>
       <Paper elevation={3} style={{ borderRadius: "25px", padding: "1rem" }}>
@@ -38,74 +70,101 @@ const MainAside = () => {
         >
           <div
             style={{
-              backgroundColor: "#f4f5ff",
+              backgroundColor: darkMode ? "#121212" : "#f4f5ff",
               margin: "1rem",
               borderRadius: "25px",
             }}
           >
-            <img src={`${prefix}/image/personal.png`} />
+            <img
+              src={
+                darkMode
+                  ? `${prefix}/image/personal_white.png`
+                  : `${prefix}/image/personal.png`
+              }
+              height={smallMode ? "100" : "200"}
+              width={smallMode ? "100" : "200"}
+            />
           </div>
 
-          <Typography
-            variant="button"
-            display={"block"}
-            fontSize={fontSize * 0.8}
-          >
-            Sonjuhy
-          </Typography>
+          <div style={{ padding: "0.5rem" }}>
+            {smallMode ? (
+              <div>
+                <Typography
+                  variant="button"
+                  display={"block"}
+                  fontSize={fontSize * 1.3}
+                  style={{ marginLeft: "0.4rem" }}
+                >
+                  Sonjuhy
+                </Typography>
+                <Typography
+                  variant="caption"
+                  display={"block"}
+                  fontSize={fontSize}
+                  style={{ marginLeft: "0.4rem" }}
+                >
+                  Portfolio
+                </Typography>
+                <Button
+                  onClick={() => {
+                    setListOpen(!listOpen);
+                  }}
+                >
+                  <Typography variant="caption">Show Contacts</Typography>
+                  {listOpen ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  )}
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <Typography
+                  variant="button"
+                  display={"block"}
+                  fontSize={fontSize * 0.8}
+                >
+                  Sonjuhy
+                </Typography>
+              </div>
+            )}
+          </div>
         </Stack>
-        <Divider variant="middle" />
-        <div style={{ padding: "0.5rem" }}>
-          {smallMode ? (
-            <div>
-              <Button
-                onClick={() => {
-                  setListOpen(!listOpen);
-                }}
-              >
-                {listOpen ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 15.75 7.5-7.5 7.5 7.5"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
-                )}
-              </Button>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+
         <Collapse in={listOpen} unmountOnExit={true}>
+          <Divider variant="middle" />
           <List
             sx={{
               width: "100%",
               maxWidth: 360,
-              bgcolor: "background.paper",
+              bgcolor: darkMode ? "#252525" : "#fff",
             }}
           >
             <ListItem>
@@ -196,6 +255,56 @@ const MainAside = () => {
               <ListItemText primary="Blog" secondary="Click to Move" />
             </ListItem>
           </List>
+          <Divider variant="middle" />
+          <Stack
+            direction={"row"}
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              margin: "0.5rem",
+              color: darkMode ? "#121212" : "#fff",
+            }}
+          >
+            <Button
+              style={{ color: darkMode ? "#fff" : greyColor }}
+              onClick={changeLanguage}
+            >
+              {languageType ? "ENG" : "한"}
+            </Button>
+            <Button style={{ color: greyColor }} onClick={changeLocalDarkMode}>
+              {darkMode ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#fff"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#121212"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                  />
+                </svg>
+              )}
+            </Button>
+          </Stack>
         </Collapse>
       </Paper>
     </div>

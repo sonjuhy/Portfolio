@@ -1,16 +1,10 @@
-import { Inter } from "next/font/google";
 import PortfolioContext from "@/context/context";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Head from "next/head";
 
 import Main from "../components/main";
-import Project from "../components/projects";
-import About from "../components/about";
 import MainAside from "@/components/aside";
 
-const inter = Inter({ subsets: ["latin"] });
-
-import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/context/redux/hooks";
 import {
   changeDarkMode,
@@ -18,7 +12,7 @@ import {
   changeSmallMode,
 } from "@/context/redux/feature/pageSize/pageSlice";
 import { changeLanguageMode } from "@/context/redux/feature/languageType/languageSlice";
-import { Container, Grid, Paper, useMediaQuery } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
@@ -39,16 +33,21 @@ const RightComponent = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
+interface IndexPageProps {
+  toggleDarkMode: () => void;
+}
+export default function Home({ toggleDarkMode }: IndexPageProps) {
+  const dispatch = useAppDispatch();
+  const smallMode = useAppSelector((state) => state.page.smallMode);
+  const darkMode = useAppSelector((state) => state.page.smallMode);
+  const languageType = useAppSelector((state) => state.language.type);
 
-export default function Home() {
   const { prefix } = useContext(PortfolioContext);
   const [selected, setSelected] = useState("projects");
   const [language, setLanguage] = useState(false); // false : eng, true : kor
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const dispatch = useAppDispatch();
-  const smallMode = useAppSelector((state) => state.page.smallMode);
-  const languageType = useAppSelector((state) => state.language.type);
+  const [localDarkMode, setLocalDarkMode] = useState(darkMode);
+  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = useTheme();
 
   const changeLanguage = () => {
     dispatch(changeLanguageMode(!languageType));
@@ -59,9 +58,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    dispatch(changeDarkMode(prefersDarkMode));
-  }, [prefersDarkMode]);
-
+    setLocalDarkMode(darkMode);
+    console.log(darkMode);
+  }, [darkMode]);
+  useEffect(() => {
+    setLocalDarkMode(theme.palette.mode === "dark" ? true : false);
+  }, [theme.palette.mode]);
   useEffect(() => {
     const handleResize = () => {
       // 컨테이너의 너비를 감지하여 글자 크기 동적 조절
@@ -91,6 +93,7 @@ export default function Home() {
       style={{
         height: "100%",
         width: "100%",
+        background: !localDarkMode ? "#ffffff" : "#121212",
       }}
     >
       <Head>
@@ -100,6 +103,9 @@ export default function Home() {
         <meta property="og:title" content={"Sonjuhy Portfolio"} />
         <meta property="og:description" content="Development History Store" />
         <meta property="og:type" content="website" />
+        <meta name="color-scheme" content="light only" />
+
+        <meta name="supported-color-schemes" content="light" />
       </Head>
       {/* <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6">
         <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
@@ -164,7 +170,7 @@ export default function Home() {
         {smallMode ? (
           <div>
             <LeftComponent>
-              <MainAside />
+              <MainAside toggleDarkMode={toggleDarkMode} />
             </LeftComponent>
             <RightComponent>
               <Main />
@@ -173,7 +179,7 @@ export default function Home() {
         ) : (
           <MainContainer>
             <div>
-              <MainAside />
+              <MainAside toggleDarkMode={toggleDarkMode} />
             </div>
             <RightComponent>
               <Main />

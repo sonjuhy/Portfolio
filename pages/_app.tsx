@@ -1,21 +1,30 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
 
-import { PortfolioProvider } from '@/context/context'
-import { prefix } from '@/config/config'
+import { PortfolioProvider } from "@/context/context";
+import { prefix } from "@/config/config";
 
-import 'tailwindcss/tailwind.css'
-import Navigation from '@/components/navigation'
-import Footer from '@/components/footer'
-import { ThemeProvider } from 'next-themes'
+import "tailwindcss/tailwind.css";
+import { Poppins } from "next/font/google";
 
-import 'react-notion-x/src/styles.css'
+import { Providers } from "@/context/redux/StoreProvider";
+
+import "react-notion-x/src/styles.css";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: "100",
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <div className='bg-white' style={{height:'100vh'}}>
-    <PortfolioProvider value={{prefix}}>
-      <Component {...pageProps} />
-      <Footer/>
-    </PortfolioProvider>
-    </div>
+  return (
+    <Providers>
+      <div className={poppins.className} style={{ height: "100vh" }}>
+        <PortfolioProvider value={{ prefix }}>
+          <Component {...pageProps} />
+          {/* <Footer /> */}
+        </PortfolioProvider>
+      </div>
+    </Providers>
+  );
 }

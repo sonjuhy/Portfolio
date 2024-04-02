@@ -59,7 +59,6 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
 
   useEffect(() => {
     setLocalDarkMode(darkMode);
-    console.log(darkMode);
   }, [darkMode]);
   useEffect(() => {
     setLocalDarkMode(theme.palette.mode === "dark" ? true : false);

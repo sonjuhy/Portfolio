@@ -43,6 +43,7 @@
     "@mui/material-nextjs": "^5.15.9",
     "@mui/styled-engine-sc": "^6.0.0-alpha.16",
     "styled-components": "^6.1.8",
+    "framer-motion": "^11.0.5",
     "typescript": "5.1.6"
   }
 }

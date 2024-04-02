@@ -51,6 +51,10 @@ export default function App({ Component, pageProps }: AppProps) {
       createTheme({
         palette: {
           mode,
+          primary: {
+            main: "#000",
+            dark: "#fff",
+          },
         },
       }),
     [mode]

@@ -92,7 +92,7 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
       style={{
         height: "100%",
         width: "100%",
-        background: !localDarkMode ? "#ffffff" : "#121212",
+        // background: !darkMode ? "#ffffff" : "#121212",
       }}
     >
       <Head>
@@ -106,7 +106,8 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
 
         <meta name="supported-color-schemes" content="light" />
       </Head>
-      {/* <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6">
+      {/*       
+      <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6">
         <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
           <Button
             variant="link"

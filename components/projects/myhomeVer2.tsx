@@ -1,12 +1,13 @@
 import PortfolioContext from "@/context/context";
 import { useAppSelector } from "@/context/redux/hooks";
 import { Box, Paper, Tooltip, Typography } from "@mui/material";
+import Link from "next/link";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<{ $isSmallMode: boolean }>`
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: ${(props) => (props.$isSmallMode ? "5" : "3")};
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
@@ -40,71 +41,77 @@ export default function Projects() {
         onMouseOut={() => {
           setHover(false);
         }}
-        style={{ height: "40vh" }}
+        style={{ height: "45vh" }}
       >
-        <Tooltip
-          title={language ? `${textHan}` : `${textEng}`}
-          arrow
-          placement="left"
-        >
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-              borderRadius: "15px",
-              height: "100%",
-            }}
+        <Link href="https://github.com/sonjuhy/MyHomeVer2" target="_blank">
+          <Tooltip
+            title={language ? `${textHan}` : `${textEng}`}
+            arrow
+            placement="left"
           >
-            <Box
+            <Paper
+              elevation={3}
               style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+                borderRadius: "15px",
                 height: "100%",
               }}
             >
-              <div
-                style={{
-                  overflow: "hidden",
-                  borderRadius: "15px",
-                  width: "100%",
-                }}
-              >
-                <img
-                  alt="profile"
-                  src={`${prefix}/image/MyHome2.0_title_image.png`}
-                  width="100%"
-                  height={250}
-                  style={{
-                    objectFit: "cover",
-                    scale: hover ? "1.1" : "1.0",
-                    transition: "0.3s",
-                    maxWidth: "100%",
-                  }}
-                />
-              </div>
               <Box
-                sx={{
-                  margin: "1rem",
-                }}
+                sx={{ marginTop: "1rem", marginBottom: "1rem", height: "100%" }}
               >
-                <Typography>Personal ▪ 2023.01 ~ 2023.10</Typography>
-                <Typography
-                  fontSize={fontSize * 0.8}
-                  fontWeight={"bold"}
-                  color={hover ? "#27f" : "#000"}
+                <div
+                  style={{
+                    overflow: "hidden",
+                    borderRadius: "15px",
+                    width: "100%",
+                    height: "25vh",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
                 >
-                  MyHome Project Ver 2.0
-                </Typography>
-                <MainContainer>
-                  <Typography>
-                    {language ? `${textHan}` : `${textEng}`}
+                  <img
+                    alt="profile"
+                    src={`${prefix}/image/MyHome2.0_title_image.png`}
+                    width="100%"
+                    // height={250}
+                    height="inherit"
+                    style={{
+                      objectFit: "cover",
+                      scale: hover ? "1.1" : "1.0",
+                      transition: "0.3s",
+                    }}
+                  />
+                </div>
+                <Box
+                  sx={{
+                    margin: "1rem",
+                  }}
+                >
+                  <Typography>Personal ▪ 2023.01 ~ 2023.10</Typography>
+                  <Typography
+                    fontSize={fontSize * 0.8}
+                    fontWeight={"bold"}
+                    color={hover ? "#27f" : "#000"}
+                  >
+                    MyHome Project Ver 2.0
                   </Typography>
-                </MainContainer>
+                  <MainContainer $isSmallMode={smallMode}>
+                    <Typography
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
+                      style={smallMode ? { marginTop: "0.5rem" } : {}}
+                    >
+                      {language ? `${textHan}` : `${textEng}`}
+                    </Typography>
+                  </MainContainer>
+                </Box>
               </Box>
-            </Box>
-          </Paper>
-        </Tooltip>
+            </Paper>
+          </Tooltip>
+        </Link>
       </div>
       {/* <div className="container px-4 mx-auto">
         <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">

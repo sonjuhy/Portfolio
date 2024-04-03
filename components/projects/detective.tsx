@@ -1,8 +1,26 @@
 import PortfolioContext from "@/context/context";
 import { useAppSelector } from "@/context/redux/hooks";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Tooltip, Typography } from "@mui/material";
+import Link from "next/link";
 import React, { useContext, useState } from "react";
+import styled from "styled-components";
 
+const MainContainer = styled.div`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+const textHan = `이미지 인식 AI를 기반으로한 안드로이드 추리 게임입니다.
+스토리를 진행할때 필요한 단서들을 사진 촬영, 전송하여
+클리어합니다. 이 프로젝트는 삼성 청년 SW 아카데미 특화
+프로젝트입니다.`;
+
+const textEng = `It is an Android mystery game using AI based on image
+detection. When proceeding with the story, the necessary
+clues are acquired through photography and transmission.
+It is a project conducted as a specialization project of
+Samsung Youth SW Academy.`;
 export default function Projects() {
   const [hover, setHover] = useState(false);
   const smallMode = useAppSelector((state) => state.page.smallMode);
@@ -19,71 +37,73 @@ export default function Projects() {
         onMouseOut={() => {
           setHover(false);
         }}
+        style={{ height: "45vh" }}
       >
-        <Paper
-          elevation={3}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            cursor: "pointer",
-            borderRadius: "15px",
-          }}
-        >
-          <Box>
-            <div
+        <Link href="https://github.com/sonjuhy/Detective" target="_blank">
+          <Tooltip
+            title={language ? `${textHan}` : `${textEng}`}
+            arrow
+            placement="right"
+          >
+            <Paper
+              elevation={3}
               style={{
-                overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
                 borderRadius: "15px",
-                width: "100%",
+                height: "100%",
               }}
             >
-              <img
-                alt="profile"
-                src={`${prefix}/image/detective.png`}
-                width="100%"
-                height={250}
-                style={{
-                  objectFit: "cover",
-                  scale: hover ? "1.1" : "1.0",
-                  transition: "0.3s",
-                }}
-              />
-            </div>
-            <Box sx={{ margin: "1rem" }}>
-              <Typography>Team ▪ 2022.08 ~ 2022.10</Typography>
-              <Typography
-                fontSize={fontSize}
-                fontWeight={"bold"}
-                color={hover ? "#27f" : "#000"}
+              <Box
+                sx={{ marginTop: "1rem", marginBottom: "1rem", height: "100%" }}
               >
-                {language ? "탐정: 렌즈 속 비밀" : "Detective"}
-              </Typography>
-              <Typography>
-                {language ? (
-                  <div>
-                    <p className="mb-4">
-                      이미지 인식 AI를 기반으로한 안드로이드 추리 게임입니다.
-                      스토리를 진행할때 필요한 단서들을 사진 촬영, 전송하여
-                      클리어합니다. 이 프로젝트는 삼성 청년 SW 아카데미 특화
-                      프로젝트입니다.
-                    </p>
-                  </div>
-                ) : (
-                  <div>
-                    <p className="mb-4">
-                      It is an Android mystery game using AI based on image
-                      detection. When proceeding with the story, the necessary
-                      clues are acquired through photography and transmission.
-                      It is a project conducted as a specialization project of
-                      Samsung Youth SW Academy.
-                    </p>
-                  </div>
-                )}
-              </Typography>
-            </Box>
-          </Box>
-        </Paper>
+                <div
+                  style={{
+                    overflow: "hidden",
+                    borderRadius: "15px",
+                    width: "100%",
+                    height: "23vh",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    alt="profile"
+                    src={`${prefix}/image/detective.png`}
+                    width="100%"
+                    // height={250}
+                    height="inherit"
+                    style={{
+                      objectFit: "cover",
+                      scale: hover ? "1.1" : "1.0",
+                      transition: "0.3s",
+                    }}
+                  />
+                </div>
+                <Box sx={{ margin: "1rem" }}>
+                  <Typography>Team ▪ 2022.08 ~ 2022.10</Typography>
+                  <Typography
+                    fontSize={fontSize}
+                    fontWeight={"bold"}
+                    color={hover ? "#27f" : "#000"}
+                  >
+                    {language ? "탐정: 렌즈 속 비밀" : "Detective"}
+                  </Typography>
+                  <MainContainer>
+                    <Typography
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
+                      style={smallMode ? { marginTop: "0.5rem" } : {}}
+                    >
+                      {language ? `${textHan}` : `${textEng}`}
+                    </Typography>
+                  </MainContainer>
+                </Box>
+              </Box>
+            </Paper>
+          </Tooltip>
+        </Link>
       </div>
       {/* <div className="container px-4 mx-auto">
         <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">

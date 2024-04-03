@@ -1,6 +1,7 @@
 import PortfolioContext from "@/context/context";
 import { useAppSelector } from "@/context/redux/hooks";
 import { Box, Paper, Tooltip, Typography } from "@mui/material";
+import Link from "next/link";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
@@ -34,63 +35,72 @@ export default function Projects() {
         onMouseOut={() => {
           setHover(false);
         }}
-        style={{ height: "40vh" }}
+        style={{ height: "45vh" }}
       >
-        <Tooltip
-          title={language ? `${textHan}` : `${textEng}`}
-          arrow
-          placement="right"
-        >
-          <Paper
-            elevation={3}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              cursor: "pointer",
-              borderRadius: "15px",
-              height: "100%",
-            }}
+        <Link href="https://github.com/sonjuhy/MyHomeVer1" target="_blank">
+          <Tooltip
+            title={language ? `${textHan}` : `${textEng}`}
+            arrow
+            placement="right"
           >
-            <Box>
-              <div
-                style={{
-                  overflow: "hidden",
-                  borderRadius: "15px",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
+            <Paper
+              elevation={3}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+                borderRadius: "15px",
+                height: "100%",
+              }}
+            >
+              <Box
+                sx={{ marginTop: "2rem", marginBottom: "1rem", height: "100%" }}
               >
-                <img
-                  alt="profile"
-                  src={`${prefix}/image/MyhomeIcon.png`}
-                  width="50%"
+                <div
                   style={{
-                    objectFit: "cover",
-                    scale: hover ? "1.1" : "1.0",
-                    transition: "0.3s",
+                    overflow: "hidden",
+                    borderRadius: "15px",
+                    width: "100%",
+                    height: "24vh",
+                    display: "flex",
+                    justifyContent: "center",
                   }}
-                />
-              </div>
-              <Box sx={{ margin: "1rem" }}>
-                <Typography>Personal ▪ 2021.01 ~ 2021.7</Typography>
-                <Typography
-                  fontSize={fontSize * 0.8}
-                  fontWeight={"bold"}
-                  color={hover ? "#27f" : "#000"}
                 >
-                  MyHome Project Ver 1.0
-                </Typography>
-                <MainContainer>
-                  <Typography>
-                    {language ? `${textHan}` : `${textEng}`}
+                  <img
+                    alt="profile"
+                    src={`${prefix}/image/MyhomeIcon.png`}
+                    // width="50%"
+                    height="inherit"
+                    style={{
+                      objectFit: "cover",
+                      scale: hover ? "1.1" : "1.0",
+                      transition: "0.3s",
+                    }}
+                  />
+                </div>
+                <Box sx={{ margin: "1rem" }}>
+                  <Typography>Personal ▪ 2021.01 ~ 2021.7</Typography>
+                  <Typography
+                    fontSize={fontSize * 0.8}
+                    fontWeight={"bold"}
+                    color={hover ? "#27f" : "#000"}
+                  >
+                    MyHome Project Ver 1.0
                   </Typography>
-                </MainContainer>
+                  <MainContainer>
+                    <Typography
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
+                      style={smallMode ? { marginTop: "0.5rem" } : {}}
+                    >
+                      {language ? `${textHan}` : `${textEng}`}
+                    </Typography>
+                  </MainContainer>
+                </Box>
               </Box>
-            </Box>
-          </Paper>
-        </Tooltip>
+            </Paper>
+          </Tooltip>
+        </Link>
       </div>
       {/* <div className="container px-4 mx-auto">
         <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">

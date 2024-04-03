@@ -15,6 +15,8 @@ import About from "./about";
 import Project from "./projects";
 import { AnimatePresence, motion } from "framer-motion";
 
+import Portfolio from "@/components/portfolio/index";
+
 const MainComponent = () => {
   const prefix = useContext(PortfolioContext);
   const dispatch = useAppDispatch();
@@ -266,9 +268,7 @@ const MainComponent = () => {
           )}
           {selected === "about" && <About />}
           {selected === "project" && <Project />}
-          {/* {selected === "portfolio" &&(
-
-      )} */}
+          {selected === "portfolio" && <Portfolio />}
           <br />
         </motion.div>
       </AnimatePresence>

@@ -11,7 +11,7 @@ import Gagesajang from "./gagesajang";
 import Study from "./study";
 import Link from "next/link";
 import { useAppSelector } from "@/context/redux/hooks";
-import { Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 
 /**
  *
@@ -28,58 +28,64 @@ export default function Projects() {
       <div
         style={
           smallMode
-            ? { width: "100%", paddingLeft: "1.5rem", paddingRight: "1.5rem" }
-            : { width: "100%", paddingLeft: "1rem", paddingRight: "1rem" }
+            ? { width: "100%", paddingLeft: "2rem", paddingRight: "2rem" }
+            : { width: "100%", paddingLeft: "2rem", paddingRight: "2rem" }
         }
       >
         {language && (
           <div>
-            <Typography>
+            <Typography
+              fontWeight={"bold"}
+              fontSize={smallMode ? 15 : 20}
+              style={{ marginBottom: "0.5rem" }}
+            >
               제가 개발한 프로젝트를 소개하는 페이지 입니다.
             </Typography>
             <Typography>
-              프로젝트를 클릭시, 해당 프로젝트의 깃허브로 이동합니다.
+              ▪ 프로젝트를 클릭시, 해당 프로젝트의 깃허브로 이동합니다.
             </Typography>
           </div>
         )}
         {!language && (
           <div>
-            <Typography>
-              This page is introduced to you about my projects. Click on each
-              project to navigate to its GitHub repository.
+            <Typography
+              fontWeight={"bold"}
+              fontSize={smallMode ? 16 : 20}
+              style={{ marginBottom: "0.5rem" }}
+            >
+              This page is introduced to you about my projects.
             </Typography>
-            <br />
-            <Typography>Please enjoy my project Portfolio.</Typography>
+            <Typography fontSize={smallMode ? 13 : 16}>
+              ▪ Click on each project to navigate to its GitHub repository.
+            </Typography>
           </div>
         )}
       </div>
-      <Grid container>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Link href="https://github.com/sonjuhy/MyHomeVer1" target="_blank">
+      <br />
+      <Divider variant="middle" />
+      {smallMode ? (
+        <Box>
+          <MyHomeVer1 />
+          <MyHomeVer2 />
+          <Gagesajang />
+          <OctopUs />
+          <Detective />
+          <Study />
+        </Box>
+      ) : (
+        <Grid container>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
             <MyHomeVer1 />
-          </Link>
-          <Link href="https://github.com/sonjuhy/GaGeSaJang" target="_blank">
             <Gagesajang />
-          </Link>
-          <Link href="https://github.com/sonjuhy/Detective" target="_blank">
             <Detective />
-          </Link>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Link href="https://github.com/sonjuhy/MyHomeVer2" target="_blank">
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
             <MyHomeVer2 />
-          </Link>
-          <Link href="https://github.com/sonjuhy/Octop-Us" target="_blank">
             <OctopUs />
-          </Link>
-          <Link
-            href="https://github.com/sonjuhy/CSPersonalStudy"
-            target="_blank"
-          >
             <Study />
-          </Link>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </div>
   );
 }

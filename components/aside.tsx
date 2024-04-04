@@ -43,7 +43,6 @@ const MainAside = ({ toggleDarkMode }: AsideProps) => {
     dispatch(changeLanguageMode(!languageType));
   };
   const changeLocalDarkMode = () => {
-    console.log("aside darkmode : " + darkMode);
     dispatch(changeDarkMode(!darkMode));
     toggleDarkMode();
   };

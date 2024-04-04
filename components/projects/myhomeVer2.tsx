@@ -5,9 +5,9 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
-const MainContainer = styled.div<{ $isSmallMode: boolean }>`
+const MainContainer = styled.div`
   display: -webkit-box;
-  -webkit-line-clamp: ${(props) => (props.$isSmallMode ? "5" : "3")};
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
@@ -28,10 +28,11 @@ security and performance.`;
 export default function Projects() {
   const [hover, setHover] = useState(false);
   const smallMode = useAppSelector((state) => state.page.smallMode);
-  const darkMode = useAppSelector((state) => state.page.smallMode);
+  const darkMode = useAppSelector((state) => state.page.darkMode);
   const language = useAppSelector((state) => state.language.type);
   const fontSize = smallMode ? 18 : 32;
   const { prefix } = useContext(PortfolioContext);
+
   return (
     <div style={{ padding: "2rem" }}>
       <div
@@ -45,7 +46,7 @@ export default function Projects() {
       >
         <Link href="https://github.com/sonjuhy/MyHomeVer2" target="_blank">
           <Tooltip
-            title={language ? `${textHan}` : `${textEng}`}
+            title={smallMode ? "" : language ? `${textHan}` : `${textEng}`}
             arrow
             placement="left"
           >
@@ -78,7 +79,7 @@ export default function Projects() {
                     src={`${prefix}/image/MyHome2.0_title_image.png`}
                     width="100%"
                     // height={250}
-                    height="inherit"
+                    height="auto"
                     style={{
                       objectFit: "cover",
                       scale: hover ? "1.1" : "1.0",
@@ -95,11 +96,19 @@ export default function Projects() {
                   <Typography
                     fontSize={fontSize * 0.8}
                     fontWeight={"bold"}
-                    color={hover ? "#27f" : "#000"}
+                    color={
+                      hover
+                        ? darkMode
+                          ? "#59f"
+                          : "#27f"
+                        : darkMode
+                        ? "#fff"
+                        : "#000"
+                    }
                   >
                     MyHome Project Ver 2.0
                   </Typography>
-                  <MainContainer $isSmallMode={smallMode}>
+                  <MainContainer>
                     <Typography
                       fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
                       style={smallMode ? { marginTop: "0.5rem" } : {}}

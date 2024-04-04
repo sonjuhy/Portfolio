@@ -51,10 +51,13 @@ export default function App({ Component, pageProps }: AppProps) {
       createTheme({
         palette: {
           mode,
-          primary: {
-            main: "#000",
-            dark: "#fff",
-          },
+          primary:
+            mode === "light"
+              ? {
+                  main: "#000",
+                  dark: "#fff",
+                }
+              : { main: "#fff", dark: "#000" },
         },
       }),
     [mode]

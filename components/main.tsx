@@ -16,6 +16,7 @@ import Project from "./projects";
 import { AnimatePresence, motion } from "framer-motion";
 
 import Portfolio from "@/components/portfolio/index";
+import styled from "styled-components";
 
 const MainComponent = () => {
   const prefix = useContext(PortfolioContext);
@@ -42,6 +43,7 @@ const MainComponent = () => {
   useEffect(() => {
     setLanguage(languageType);
   }, [languageType]);
+
   return (
     <Paper
       elevation={3}

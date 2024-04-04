@@ -41,7 +41,7 @@ export default function Projects() {
             >
               제가 개발한 프로젝트를 소개하는 페이지 입니다.
             </Typography>
-            <Typography>
+            <Typography fontSize={smallMode ? 13 : 16}>
               ▪ 프로젝트를 클릭시, 해당 프로젝트의 깃허브로 이동합니다.
             </Typography>
           </div>

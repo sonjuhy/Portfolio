@@ -22,10 +22,11 @@ Cloud, Weather Info, Notice etc... on Mobile(Android)`;
 export default function Projects() {
   const [hover, setHover] = useState(false);
   const smallMode = useAppSelector((state) => state.page.smallMode);
-  const darkMode = useAppSelector((state) => state.page.smallMode);
+  const darkMode = useAppSelector((state) => state.page.darkMode);
   const language = useAppSelector((state) => state.language.type);
   const fontSize = smallMode ? 18 : 32;
   const { prefix } = useContext(PortfolioContext);
+
   return (
     <div style={{ padding: "2rem" }}>
       <div
@@ -39,7 +40,7 @@ export default function Projects() {
       >
         <Link href="https://github.com/sonjuhy/MyHomeVer1" target="_blank">
           <Tooltip
-            title={language ? `${textHan}` : `${textEng}`}
+            title={smallMode ? "" : language ? `${textHan}` : `${textEng}`}
             arrow
             placement="right"
           >
@@ -84,7 +85,15 @@ export default function Projects() {
                   <Typography
                     fontSize={fontSize * 0.8}
                     fontWeight={"bold"}
-                    color={hover ? "#27f" : "#000"}
+                    color={
+                      hover
+                        ? darkMode
+                          ? "#59f"
+                          : "#27f"
+                        : darkMode
+                        ? "#fff"
+                        : "#000"
+                    }
                   >
                     MyHome Project Ver 1.0
                   </Typography>

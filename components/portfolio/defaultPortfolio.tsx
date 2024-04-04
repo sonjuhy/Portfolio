@@ -1,18 +1,131 @@
-import React, { useState } from "react";
-import { Document, Page } from "react-pdf";
+import PortfolioContext from "@/context/context";
+import { useAppDispatch, useAppSelector } from "@/context/redux/hooks";
+import { Box, Tooltip, Typography } from "@mui/material";
+import Link from "next/link";
+import React, { useContext, useState } from "react";
 
-type props = {
-  language: boolean,
-}
+const textHan = `저에 대한 소개 및 스킬, 여러 프로젝트를 소개합니다.`;
+const textEng = `Introductions and skills, and individual or team projects.`;
 
-export default function Portfolio({language}:props) {
-    const [prefix, setPrefix] = useState('https://sonjuhy.github.io/Portfolio');
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-    const onDocumentLoaded = ({}) => setNumPages(numPages);
+export default function Portfolio() {
+  const { prefix } = useContext(PortfolioContext);
+  const dispatch = useAppDispatch();
+  const smallMode = useAppSelector((state) => state.page.smallMode);
+  const language = useAppSelector((state) => state.language.type);
+  const fontSize = smallMode ? 18 : 32;
 
+  const [hover, setHover] = useState(false);
   return (
-    <div className="flex flex-wrap">
+    <div
+      style={{
+        padding: "1rem",
+        marginTop: "1rem",
+        marginBottom: "2rem",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        onMouseOver={() => {
+          setHover(true);
+        }}
+        onMouseOut={() => {
+          setHover(false);
+        }}
+        style={{ height: "25vh", width: "20vw" }}
+      >
+        <Link href={`${prefix}/portfolio-default`} target="_blank">
+          <Tooltip
+            title={smallMode ? "" : language ? `${textHan}` : `${textEng}`}
+            arrow
+            placement="right"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+                height: "100%",
+              }}
+            >
+              <Box
+                sx={
+                  smallMode
+                    ? { height: "100%", width: "70vw" }
+                    : { height: "100%", width: "16vw" }
+                }
+              >
+                <div
+                  style={{
+                    overflow: "hidden",
+                    borderRadius: "15px",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    alt="profile"
+                    src={`${prefix}/image/portfolio.png`}
+                    width="95%"
+                    height="auto"
+                    style={
+                      smallMode
+                        ? {
+                            borderRadius: "15px",
+                            objectFit: "cover",
+                            minWidth: "70vw",
+                          }
+                        : {
+                            borderRadius: "15px",
+                            objectFit: "cover",
+                            scale: hover ? "1.1" : "1.0",
+                            transition: "0.3s",
+                          }
+                    }
+                  />
+                </div>
+                <div style={{ margin: "1rem", width: "90%" }}>
+                  {language ? (
+                    <div>
+                      <Typography fontWeight={"bold"}>
+                        프로젝트 모음 포트폴리오
+                      </Typography>
+                      <Typography
+                        fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
+                        style={{
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {textHan}
+                      </Typography>
+                    </div>
+                  ) : (
+                    <div>
+                      <Typography fontWeight={"bold"}>
+                        Projects Portfolio
+                      </Typography>
+                      <Typography
+                        fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
+                        style={{
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {textEng}
+                      </Typography>
+                    </div>
+                  )}
+                </div>
+              </Box>
+            </Box>
+          </Tooltip>
+        </Link>
+      </div>
+      {/*       
       <div className="max-w-4xl mx-auto mt-16 antialiased">
         <div className="container px-4 mx-auto">
             <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">
@@ -67,7 +180,7 @@ export default function Portfolio({language}:props) {
                 </div>
             </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
-};
+}

@@ -17,7 +17,6 @@ export default function SkillCard() {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
   return (
     <div style={{ maxWidth: "90vw" }}>
       <TabContext value={value}>

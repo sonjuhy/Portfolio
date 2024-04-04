@@ -12,8 +12,9 @@ import {
   changeSmallMode,
 } from "@/context/redux/feature/pageSize/pageSlice";
 import { changeLanguageMode } from "@/context/redux/feature/languageType/languageSlice";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 import styled from "styled-components";
+import Link from "next/link";
 
 const MainContainer = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ interface IndexPageProps {
 export default function Home({ toggleDarkMode }: IndexPageProps) {
   const dispatch = useAppDispatch();
   const smallMode = useAppSelector((state) => state.page.smallMode);
-  const darkMode = useAppSelector((state) => state.page.smallMode);
+  const darkMode = useAppSelector((state) => state.page.darkMode);
   const languageType = useAppSelector((state) => state.language.type);
 
   const { prefix } = useContext(PortfolioContext);
@@ -92,7 +93,7 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
       style={{
         height: "100%",
         width: "100%",
-        // background: !darkMode ? "#ffffff" : "#121212",
+        background: !darkMode ? "#ffffff" : "#121212",
       }}
     >
       <Head>
@@ -106,73 +107,13 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
 
         <meta name="supported-color-schemes" content="light" />
       </Head>
-      {/*       
-      <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6">
-        <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
-          <Button
-            variant="link"
-            onClick={() => setSelected("main")}
-            className={
-              "font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " +
-              (selected === "main" ? "text-sky-500" : "")
-            }
-          >
-            SonJuHy
-          </Button>
-          <div className="text-right text-xs">
-            <Button
-              variant="link"
-              onClick={() => setSelected("about")}
-              className={
-                "font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " +
-                (selected === "about" ? "text-sky-500" : "")
-              }
-              style={{ marginRight: "1rem" }}
-            >
-              about
-            </Button>
-            <Link
-              href={"/Portfolio/portfolioPage"}
-              className={
-                "font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " +
-                (selected === "portfolio" ? "text-sky-500" : "")
-              }
-              style={{ marginRight: "1rem" }}
-            >
-              portfolio
-            </Link>
-            <Button
-              variant="link"
-              onClick={() => setSelected("projects")}
-              className={
-                "font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase   " +
-                (selected === "projects" ? "text-sky-500" : "")
-              }
-              style={{ marginRight: "1rem" }}
-            >
-              projects
-            </Button>
-            <Button
-              variant="link"
-              onClick={() => setLanguage(!language)}
-              className={
-                "font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase  "
-              }
-            >
-              {language && "한"}
-              {!language && "Eng"}
-            </Button>
-          </div>
-        </div>
-      </div> */}
-
       <div style={{ display: "flex", justifyContent: "center" }}>
         {smallMode ? (
           <div>
             <LeftComponent>
               <MainAside toggleDarkMode={toggleDarkMode} />
             </LeftComponent>
-            <RightComponent>
+            <RightComponent style={{ minWidth: "100vw" }}>
               <Main />
             </RightComponent>
           </div>
@@ -181,7 +122,7 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
             <div>
               <MainAside toggleDarkMode={toggleDarkMode} />
             </div>
-            <RightComponent>
+            <RightComponent style={{ minWidth: "55vw" }}>
               <Main />
             </RightComponent>
           </MainContainer>

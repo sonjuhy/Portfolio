@@ -24,7 +24,7 @@ project of Samsung Youth SW Academy.`;
 export default function Projects() {
   const [hover, setHover] = useState(false);
   const smallMode = useAppSelector((state) => state.page.smallMode);
-  const darkMode = useAppSelector((state) => state.page.smallMode);
+  const darkMode = useAppSelector((state) => state.page.darkMode);
   const language = useAppSelector((state) => state.language.type);
   const fontSize = smallMode ? 18 : 32;
   const { prefix } = useContext(PortfolioContext);
@@ -42,7 +42,7 @@ export default function Projects() {
       >
         <Link href="https://github.com/sonjuhy/Octop-Us" target="_blank">
           <Tooltip
-            title={language ? `${textHan}` : `${textEng}`}
+            title={smallMode ? "" : language ? `${textHan}` : `${textEng}`}
             arrow
             placement="left"
           >
@@ -88,7 +88,15 @@ export default function Projects() {
                   <Typography
                     fontSize={fontSize}
                     fontWeight={"bold"}
-                    color={hover ? "#27f" : "#000"}
+                    color={
+                      hover
+                        ? darkMode
+                          ? "#59f"
+                          : "#27f"
+                        : darkMode
+                        ? "#fff"
+                        : "#000"
+                    }
                   >
                     Octop-US
                   </Typography>

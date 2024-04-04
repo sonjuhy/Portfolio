@@ -5,7 +5,7 @@ type LanguageTypeState = {
 };
 
 const initialState = {
-  type: false,
+  type: true,
 } as LanguageTypeState;
 
 export const pageChanger = createSlice({

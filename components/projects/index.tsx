@@ -9,6 +9,8 @@ import OctopUs from "./octopUs";
 import Detective from "./detective";
 import Gagesajang from "./gagesajang";
 import Study from "./study";
+import AIStudy from "./aiStudy";
+import VLMStudy from "./vlmStudy";
 import Link from "next/link";
 import { useAppSelector } from "@/context/redux/hooks";
 import { Box, Divider, Grid, Typography } from "@mui/material";
@@ -65,6 +67,8 @@ export default function Projects() {
       <Divider variant="middle" />
       {smallMode ? (
         <Box>
+          <AIStudy />
+          <VLMStudy />
           <MyHomeVer1 />
           <MyHomeVer2 />
           <Gagesajang />
@@ -75,14 +79,17 @@ export default function Projects() {
       ) : (
         <Grid container>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            <AIStudy />
             <MyHomeVer1 />
             <Gagesajang />
             <Detective />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            <VLMStudy />
             <MyHomeVer2 />
             <OctopUs />
             <Study />
+            <VLMStudy />
           </Grid>
         </Grid>
       )}

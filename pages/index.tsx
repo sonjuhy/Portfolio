@@ -6,6 +6,7 @@ import Main from "../components/main";
 import MainAside from "@/components/aside";
 
 import { useAppDispatch, useAppSelector } from "@/context/redux/hooks";
+import { RootState } from "@/context/redux/store";
 import {
   changeDarkMode,
   changeNum,
@@ -20,7 +21,8 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh; /* 화면 전체 높이에 맞추기 위해 */
+
+  min-height: 100vh; /* 화면 전체 높이에 맞추기 위해 */
 `;
 
 const LeftComponent = styled.div`
@@ -39,9 +41,9 @@ interface IndexPageProps {
 }
 export default function Home({ toggleDarkMode }: IndexPageProps) {
   const dispatch = useAppDispatch();
-  const smallMode = useAppSelector((state) => state.page.smallMode);
-  const darkMode = useAppSelector((state) => state.page.darkMode);
-  const languageType = useAppSelector((state) => state.language.type);
+  const smallMode = useAppSelector((state: RootState) => state.page.smallMode);
+  const darkMode = useAppSelector((state: RootState) => state.page.darkMode);
+  const languageType = useAppSelector((state: RootState) => state.language.type);
 
   const { prefix } = useContext(PortfolioContext);
   const [selected, setSelected] = useState("projects");
@@ -113,7 +115,7 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
             <LeftComponent>
               <MainAside toggleDarkMode={toggleDarkMode} />
             </LeftComponent>
-            <RightComponent style={{ minWidth: "100vw" }}>
+            <RightComponent style={{ minWidth: "100%" }}>
               <Main />
             </RightComponent>
           </div>

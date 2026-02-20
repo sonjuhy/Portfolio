@@ -81,8 +81,11 @@ const MainAside = ({ toggleDarkMode }: AsideProps) => {
                       ? `${prefix}/image/personal_white.png`
                       : `${prefix}/image/personal.png`
                   }
-                  height={smallMode ? "100" : "200"}
-                  width={smallMode ? "100" : "200"}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    width: smallMode ? "100px" : "200px"
+                  }}
                 />
               </div>
 

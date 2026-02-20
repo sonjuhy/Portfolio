@@ -41,6 +41,101 @@ export default function CareerCard() {
                       style={{ fontWeight: "bolder", marginBottom: "0.5rem" }}
                       fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
                     >
+                      {"에딘트 AI 개발팀 입사"}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.5rem" }}
+                      fontSize={smallMode ? fontSize * 0.7 : fontSize * 0.4}
+                    >
+                      {"2024.07 ~ "}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"⦁ 비전 AI (Object Detection, Classification) 모델 개발 및 개선."}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"⦁ 온 디바이스 AI 모델 경량화 및 최적화."}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"⦁ 온 프레미스 환경에서의 AI 모델 서빙 및 운영 솔루션 개발."}
+                    </Typography>
+                    <Typography
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"⦁ MLOps 파이프라인 구축 및 자동화."}
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    <Typography
+                      style={{ fontWeight: "bolder", marginBottom: "0.5rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"Joining the Edient AI Development Team."}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.5rem" }}
+                      fontSize={smallMode ? fontSize * 0.7 : fontSize * 0.4}
+                    >
+                      {"2024.07 ~ "}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"⦁ Vision AI (Object Detection, Classification) model development and improvement."}
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {
+                        "⦁ On-device AI model optimization(Quantization, fine-tuning) and improvement."
+                      }
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {
+                        "⦁ On-premise AI model serving and operation solution development."
+                      }
+                    </Typography>
+                    <Typography
+                      style={{ marginBottom: "0.3rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
+                      {"⦁ MLOps pipeline construction and automation."}
+                    </Typography>
+                  </>
+                )}
+              </Box>
+            </TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineDot color="primary" />
+              <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent
+              fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+              fontWeight={"bolder"}
+            >
+              <Box marginBottom={"1.5rem"}>
+                {languageType ? (
+                  <>
+                    <Typography
+                      style={{ fontWeight: "bolder", marginBottom: "0.5rem" }}
+                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.5}
+                    >
                       {"삼성 청년 SW 아카데미(SSAFY) 7기"}
                     </Typography>
                     <Typography
@@ -189,39 +284,6 @@ export default function CareerCard() {
           </TimelineItem>
         </Timeline>
       </div>
-      {/* <div className="flex flex-wrap" style={{ marginTop: "1rem" }}>
-        <div className="w-full">
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded  ">
-            <div className="px-4 py-5 flex-auto   text-left">
-              {language && (
-                <div>
-                  <p className="mb-4 text-lg">
-                    <strong>창원대학교 졸업</strong>
-                  </p>
-                  <p className="mb-4 font-light">2015.03 ~ 2021.08</p>
-                  <p className="mb-4">⦁ 컴퓨터 공학과 졸업.</p>
-                  <p className="mb-4">
-                    ⦁ 졸업작품으로 실시간 위치기반 버스광고 시스템 구현.
-                  </p>
-                </div>
-              )}
-              {!language && (
-                <div>
-                  <p className="mb-4 text-lg">
-                    <strong>Graduated from Changwon University</strong>
-                  </p>
-                  <p className="mb-4 font-light">2015.03 ~ 2021.08</p>
-                  <p className="mb-4">⦁ A graduate in computer engineering.</p>
-                  <p className="mb-4">
-                    ⦁ Real-time location-based bus advertising system is
-                    implemented as a graduation work.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }

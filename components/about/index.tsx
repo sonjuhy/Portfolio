@@ -29,32 +29,31 @@ export default function About() {
                     style={{ marginBottom: "0.7rem" }}
                   >
                     <strong>
-                      한번 시도로 안되면 두번 세번 시도하는 백엔드 개발자입니다.
+                      한번 시도로 안되면 두번 세번 시도하는 AI 엔지니어입니다.
                     </strong>
                   </Typography>
                   <Typography color={darkMode ? "#fff" : "#000"}>
-                    컴퓨터 공학과를 전공하였으며, 백엔드 뿐만 아니라 여러 분야
-                    또한 배우고 도전하는것을 좋아합니다.
+                    전공 분야인 AI를 넘어, 다양한 기술 스택을 탐구하고 내 것으로 만드는 과정을 즐깁니다.
                   </Typography>
                   <br />
                   <Typography color={darkMode ? "#fff" : "#000"}>
-                    그동안 제가 배우고 개발한 내용들을 즐겁게 둘러보는 시간이
-                    되시길 바랍니다.
+                    제가 배우고 기록하며 개발한 결과물들을 이곳에서 확인해 보세요.
                   </Typography>
                 </div>
               )}
               {!language && (
                 <div>
                   <Typography color={darkMode ? "#fff" : "#000"}>
-                    I&apos;m a back-end developer who tries twice or three times
-                    to achieve results if it doesn&apos;t work out once. I
-                    majored in computer engineering&apos; and I like to learn
-                    various fields as well as backend.
+                    <strong>
+                      An AI Engineer who finds solutions through persistence and relentless iteration.
+                    </strong>
+                  </Typography>
+                  <Typography color={darkMode ? "#fff" : "#000"}>
+                    Beyond my core expertise in AI, I thrive on exploring diverse tech stacks and mastering new challenges.
                   </Typography>
                   <br />
                   <Typography color={darkMode ? "#fff" : "#000"}>
-                    I hope it will be a time to check what kind of things I have
-                    developed and studied.
+                    I invite you to explore the projects and insights I have built through continuous learning and documentation.
                   </Typography>
                 </div>
               )}

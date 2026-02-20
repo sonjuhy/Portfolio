@@ -12,14 +12,14 @@ import { Providers } from "@/context/redux/StoreProvider";
 import "react-notion-x/src/styles.css";
 import {
   PaletteMode,
-  PaletteOptions,
   ThemeProvider,
   createTheme,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 // import theme from "@/customTheme";
-import { createContext, useMemo, useState } from "react";
+import { createContext, useMemo, useEffect } from "react";
+import { ThemeProvider as NextThemeProvider, useTheme as useNextTheme } from "next-themes";
+import { useAppDispatch } from "@/context/redux/hooks";
+import { changeDarkMode } from "@/context/redux/feature/pageSize/pageSlice";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,23 +28,18 @@ const poppins = Poppins({
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-export default function App({ Component, pageProps }: AppProps) {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [mode, setMode] = useState<PaletteMode>(
-    prefersDarkMode ? "dark" : "light"
-  );
+// ThemeWrapper to sync next-themes with MUI and Redux
+function ThemeWrapper({ Component, pageProps }: { Component: any, pageProps: any }) {
+  const { resolvedTheme, setTheme } = useNextTheme();
+  const dispatch = useAppDispatch();
 
-  const toggleDarkMode = () => {
-    setMode(theme.palette.mode === "dark" ? "light" : "dark");
-  };
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
-    }),
-    []
-  );
+  useEffect(() => {
+    if (resolvedTheme) {
+      dispatch(changeDarkMode(resolvedTheme === "dark"));
+    }
+  }, [resolvedTheme, dispatch]);
+
+  const mode = (resolvedTheme === "dark" ? "dark" : "light") as PaletteMode;
 
   const theme = useMemo(
     () =>
@@ -62,16 +57,36 @@ export default function App({ Component, pageProps }: AppProps) {
       }),
     [mode]
   );
+
+  const toggleDarkMode = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: toggleDarkMode,
+    }),
+    [resolvedTheme, setTheme]
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} toggleDarkMode={toggleDarkMode} />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <Providers>
       <PortfolioProvider value={{ prefix }}>
-        <ColorModeContext.Provider value={colorMode}>
-          <div className={poppins.className}>
-            <ThemeProvider theme={theme}>
-              <Component {...pageProps} toggleDarkMode={toggleDarkMode} />
-            </ThemeProvider>
-          </div>
-        </ColorModeContext.Provider>
+        <div className={poppins.className}>
+          <NextThemeProvider attribute="class" enableSystem={true} defaultTheme="system">
+            <ThemeWrapper Component={Component} pageProps={pageProps} />
+          </NextThemeProvider>
+        </div>
       </PortfolioProvider>
     </Providers>
   );

@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import PortfolioContext from "@/context/context";
 
 import Head from "next/head";
-import React from "react";
+import React, { Component, ErrorInfo, ReactNode } from "react";
 import { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 
@@ -14,10 +14,33 @@ import Image from "next/image";
 import Link from "next/link";
 
 import notion from "@/modules/notion";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, Button as MuiButton } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/context/redux/hooks";
 import { changeLanguageMode } from "@/context/redux/feature/languageType/languageSlice";
 import { changeDarkMode } from "@/context/redux/feature/pageSize/pageSlice";
+
+class ErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode; fallback: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("NotionRenderer Error caught by ErrorBoundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
 
 const DynamicPage = ({ result, page, recordMap }: any) => {
   const { prefix } = useContext(PortfolioContext);
@@ -37,11 +60,12 @@ const DynamicPage = ({ result, page, recordMap }: any) => {
   };
 
   const myUrlPage = (pageId: string) => {
+    if (!pageId) return `${prefix}/`;
     return `${prefix}/${pageId.replace(/-/g, "")}`;
   };
   // 페이지 내용 렌더링
   return (
-    <div>
+    <div className="min-h-screen dark:bg-[#2f3437]">
       <Head>
         <title>Sonjuhy Portfolio</title>
         <link rel="icon" href={`${prefix}/favicon.ico`} />
@@ -50,12 +74,12 @@ const DynamicPage = ({ result, page, recordMap }: any) => {
         <meta property="og:description" content="Development History Store" />
         <meta property="og:type" content="website" />
       </Head>
-      <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6 ">
+      <div className="sticky top-0 z-20 py-2 bg-white dark:bg-[#2f3437] md:py-6 md:mb-6 ">
         <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
           <Link
             href={"/Portfolio"}
             className={
-              "font-medium tracking-wider transition-colors   hover:text-sky-500 uppercase  " +
+              "font-medium tracking-wider transition-colors dark:text-white hover:text-sky-500 uppercase " +
               (selected === "main" ? "text-sky-500" : "")
             }
           >
@@ -65,7 +89,7 @@ const DynamicPage = ({ result, page, recordMap }: any) => {
             <Link
               href={`${prefix}/`}
               className={
-                "font-medium tracking-wider transition-colors   hover:text-sky-500 uppercase  " +
+                "font-medium tracking-wider transition-colors dark:text-white hover:text-sky-500 uppercase " +
                 (selected === "main" ? "text-sky-500" : "")
               }
               style={{ marginRight: "1rem" }}
@@ -76,7 +100,7 @@ const DynamicPage = ({ result, page, recordMap }: any) => {
               variant="link"
               onClick={changeLanguage}
               className={
-                "font-medium tracking-wider transition-colors   hover:text-sky-500 uppercase  "
+                "font-medium tracking-wider transition-colors dark:text-white hover:text-sky-500 uppercase "
               }
               style={{ marginRight: "1rem" }}
             >
@@ -85,8 +109,8 @@ const DynamicPage = ({ result, page, recordMap }: any) => {
           </Stack>
         </div>
       </div>
-      <div className="flex flex-wrap">
-        <div className="max-w-4xl mx-auto mt-16 antialiased">
+      <div className="flex flex-wrap dark:bg-[#2f3437]">
+        <div className="max-w-4xl mx-auto mt-16 antialiased dark:text-white">
           <div className="container px-4 mx-auto">
             <div className="lg:space-x-5 lg:flex lg:flex-row item-center lg:-mx-4 flex flex-col-reverse text-center lg:text-left">
               <div className="lg:px-4 lg:mt-12 ">
@@ -202,30 +226,61 @@ const DynamicPage = ({ result, page, recordMap }: any) => {
                 </div>
               </div>
             )} */}
-            <Box>
-              <hr />
-              <br />
-              <Button href={`${prefix}/`}>
-                <Typography>
-                  {language ? "[홈으로]" : "[Back to Main]"}
+            <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
+              <MuiButton 
+                href={`${prefix}/`}
+                variant="outlined"
+                color="inherit"
+                sx={{ 
+                  borderRadius: '20px', 
+                  padding: '8px 24px', 
+                  textTransform: 'none',
+                  borderColor: darkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+                  '&:hover': {
+                    borderColor: darkMode ? '#fff' : '#000',
+                  }
+                }}
+              >
+                <Typography fontSize="1.1rem" fontWeight="500">
+                  {language ? "홈으로 돌아가기" : "Back to Main"}
                 </Typography>
-              </Button>
-              <div>
-                <NotionRenderer
-                  recordMap={recordMap}
-                  fullPage={true}
-                  mapPageUrl={myUrlPage}
-                  darkMode={false}
-                  disableHeader={true}
-                  components={{
-                    Collection,
-                    Modal,
-                    nextImage: Image,
-                    nextLink: Link,
-                  }}
-                />
-              </div>
+              </MuiButton>
             </Box>
+            {recordMap && recordMap.block && Object.keys(recordMap.block).length > 0 ? (
+              <div className={darkMode ? "dark-mode" : ""}>
+                <ErrorBoundary
+                  fallback={
+                    <Box sx={{ textAlign: "center", py: 10 }}>
+                      <Typography variant="h6" color="text.secondary">
+                        {language 
+                          ? "문서의 일부 데이터가 손상되어 내용을 불러올 수 없습니다." 
+                          : "Some document data is corrupted and cannot be loaded."}
+                      </Typography>
+                    </Box>
+                  }
+                >
+                  <NotionRenderer
+                    recordMap={recordMap}
+                    fullPage={true}
+                    mapPageUrl={myUrlPage}
+                    darkMode={darkMode}
+                    disableHeader={true}
+                    components={{
+                      Collection,
+                      Modal,
+                      nextImage: Image,
+                      nextLink: Link,
+                    }}
+                  />
+                </ErrorBoundary>
+              </div>
+            ) : (
+              <Box sx={{ textAlign: "center", py: 10 }}>
+                <Typography variant="h6" color="text.secondary">
+                  {language ? "문서를 불러올 수 없거나 빈 페이지입니다." : "Cannot load document or page is empty."}
+                </Typography>
+              </Box>
+            )}
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function Projects() {
   const smallMode = useAppSelector((state) => state.page.smallMode);
   const darkMode = useAppSelector((state) => state.page.darkMode);
   const language = useAppSelector((state) => state.language.type);
-  const fontSize = smallMode ? 18 : 32;
+  const fontSize = smallMode ? 13 : 18;
   const { prefix } = useContext(PortfolioContext);
 
   return (
@@ -104,7 +104,7 @@ export default function Projects() {
                   </Typography>
                   <MainContainer>
                     <Typography
-                      fontSize={smallMode ? fontSize * 0.8 : fontSize * 0.4}
+                      fontSize={smallMode ? 11 : 12}
                       style={smallMode ? { marginTop: "0.5rem" } : {}}
                     >
                       {language ? `${textHan}` : `${textEng}`}

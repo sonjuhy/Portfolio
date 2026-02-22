@@ -355,9 +355,31 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // 여기에서 데이터를 불러와야 합니다.
   const result = page === "portfolioPage" ? true : false;
-  var recordMap = null;
+  let recordMap: any = null;
   if (!result) {
     recordMap = await notion.getPage(pageNum);
+
+    // Notion block 데이터 중 id가 없어 react-notion-x에서 TypeError(replace)가 발생하는 문제 보정
+    // 더불어, recordMap.block[key].value에 { value, role } 형태의 이중 구조가 감싸져서 전달되는 현상 보정 (type 에러 원인)
+    if (recordMap) {
+      const flattenMap = (mapObj: any) => {
+        if (!mapObj) return;
+        Object.keys(mapObj).forEach((key) => {
+          let itemValue = mapObj[key]?.value;
+          if (itemValue && itemValue.value && itemValue.role) {
+            mapObj[key].value = itemValue.value;
+            itemValue = mapObj[key].value;
+          }
+          if (itemValue && !itemValue.id) {
+            itemValue.id = key;
+          }
+        });
+      };
+
+      flattenMap(recordMap.block);
+      flattenMap(recordMap.collection);
+      flattenMap(recordMap.collection_view);
+    }
   }
 
   return {

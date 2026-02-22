@@ -89,7 +89,6 @@ export default function Projects() {
             <MyHomeVer2 />
             <OctopUs />
             <Study />
-            <VLMStudy />
           </Grid>
         </Grid>
       )}

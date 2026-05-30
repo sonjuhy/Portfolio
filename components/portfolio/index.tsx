@@ -6,6 +6,8 @@ import DefaultPortfolio from "./defaultPortfolio";
 import MyHomeSequencePortfolio from "./myHomeSequencePortfolio";
 import MyHomeVer1Portfolio from "./myHomeVer1Portfolio";
 import MyHomeVer2Portfolio from "./myHomeVer2Portfolio";
+import VisionicNetHistoryPortfolio from "./visionicNetHistoryPortfolio";
+import VisionicStudioInfraPortfolio from "./visionicStudioInfraPortfolio";
 
 const MainComponent = () => {
   const smallMode = useAppSelector((state) => state.page.smallMode);
@@ -30,7 +32,7 @@ const MainComponent = () => {
                 저의 포트폴리오를 소개하는 페이지 입니다.
               </Typography>
               <Typography fontSize={smallMode ? 13 : 16}>
-                ▪ 포트폴리오를 클릭시, 해당 사이트로 이동합니다.
+                ▪ 포트폴리오를 클릭시, 해당 사이트 또는 상세 내역으로 이동합니다.
               </Typography>
             </div>
           )}
@@ -41,10 +43,10 @@ const MainComponent = () => {
                 fontSize={smallMode ? 16 : 20}
                 style={{ marginBottom: "0.5rem" }}
               >
-                This page is introduced to you about my portfolios.
+                This page introduces you to my portfolios.
               </Typography>
               <Typography fontSize={smallMode ? 13 : 16}>
-                ▪ Click on each portfolio to navigate to its web site.
+                ▪ Click on each portfolio to view details or navigate to its website.
               </Typography>
             </div>
           )}
@@ -55,7 +57,7 @@ const MainComponent = () => {
 
         <div
           id="content_container"
-          style={{ transition: "width 0.5s, height: 0.5s" }}
+          style={{ transition: "width 0.5s, height 0.5s" }}
         >
           {smallMode ? (
             <div style={{ marginBottom: "4rem" }}>
@@ -63,16 +65,20 @@ const MainComponent = () => {
               <MyHomeSequencePortfolio />
               <MyHomeVer1Portfolio />
               <MyHomeVer2Portfolio />
+              <VisionicNetHistoryPortfolio />
+              <VisionicStudioInfraPortfolio />
             </div>
           ) : (
             <Grid container>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <DefaultPortfolio />
                 <MyHomeVer1Portfolio />
+                <VisionicNetHistoryPortfolio />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <MyHomeSequencePortfolio />
                 <MyHomeVer2Portfolio />
+                <VisionicStudioInfraPortfolio />
               </Grid>
             </Grid>
           )}

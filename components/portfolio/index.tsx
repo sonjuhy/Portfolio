@@ -17,11 +17,11 @@ const MainComponent = () => {
       <div
         style={
           smallMode
-            ? { width: "100%" }
+            ? { width: "100%", paddingLeft: "2rem", paddingRight: "2rem" }
             : { width: "100%", paddingLeft: "1rem", paddingRight: "1rem" }
         }
       >
-        <div style={{ padding: smallMode ? "1.5rem" : "2rem" }}>
+        <div style={{ paddingTop: smallMode ? "1.5rem" : "2rem", paddingBottom: smallMode ? "1.5rem" : "2rem" }}>
           {language && (
             <div>
               <Typography

@@ -111,11 +111,11 @@ export default function Home({ toggleDarkMode }: IndexPageProps) {
       </Head>
       <div style={{ display: "flex", justifyContent: "center" }}>
         {smallMode ? (
-          <div>
-            <LeftComponent>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", maxWidth: "100vw", overflowX: "hidden" }}>
+            <LeftComponent style={{ width: "100%", display: "flex", justifyContent: "center" }}>
               <MainAside toggleDarkMode={toggleDarkMode} />
             </LeftComponent>
-            <RightComponent style={{ minWidth: "100%" }}>
+            <RightComponent style={{ width: "100%", minWidth: "100%", padding: "1rem", boxSizing: "border-box" }}>
               <Main />
             </RightComponent>
           </div>

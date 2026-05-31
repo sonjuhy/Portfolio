@@ -47,8 +47,10 @@ const MainComponent = () => {
   return (
     <Paper
       elevation={3}
-      style={{
-        // width: smallMode ? "100%" : "75%",
+      style={smallMode ? {
+        width: "100%",
+        borderRadius: "25px",
+      } : {
         maxWidth: "800px",
         minWidth: "50vw",
         borderRadius: "25px",

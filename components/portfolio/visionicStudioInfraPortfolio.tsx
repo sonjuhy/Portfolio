@@ -39,9 +39,7 @@ export default function VisionicStudioInfraPortfolio() {
   return (
     <div
       style={{
-        padding: "1rem",
-        marginTop: "1rem",
-        marginBottom: "2rem",
+        padding: "2rem",
         display: "flex",
         justifyContent: "center",
       }}
@@ -50,7 +48,9 @@ export default function VisionicStudioInfraPortfolio() {
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         onClick={handleClickOpen}
-        style={{ height: "25vh", width: "20vw" }}
+        style={smallMode
+          ? { height: "auto", width: "100%" }
+          : { height: "25vh", width: "20vw" }}
       >
         <Tooltip
           title={smallMode ? "" : language ? `${textHan}` : `${textEng}`}
@@ -69,7 +69,7 @@ export default function VisionicStudioInfraPortfolio() {
             <Box
               sx={
                 smallMode
-                  ? { height: "100%", width: "70vw" }
+                  ? { height: "100%", width: "100%" }
                   : { height: "100%", width: "16vw" }
               }
             >
@@ -91,7 +91,7 @@ export default function VisionicStudioInfraPortfolio() {
                       ? {
                           borderRadius: "15px",
                           objectFit: "cover",
-                          minWidth: "70vw",
+                          width: "100%",
                         }
                       : {
                           borderRadius: "15px",

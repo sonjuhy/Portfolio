@@ -17,9 +17,7 @@ export default function Portfolio() {
   return (
     <div
       style={{
-        padding: "1rem",
-        marginTop: "1rem",
-        marginBottom: "2rem",
+        padding: "2rem",
         display: "flex",
         justifyContent: "center",
       }}
@@ -31,7 +29,9 @@ export default function Portfolio() {
         onMouseOut={() => {
           setHover(false);
         }}
-        style={{ height: "25vh", width: "20vw" }}
+        style={smallMode
+          ? { height: "auto", width: "100%" }
+          : { height: "25vh", width: "20vw" }}
       >
         <Link href={`${prefix}/portfolio-sequence`} target="_blank">
           <Tooltip
@@ -51,7 +51,7 @@ export default function Portfolio() {
               <Box
                 sx={
                   smallMode
-                    ? { height: "100%", width: "70vw" }
+                    ? { height: "100%", width: "100%" }
                     : { height: "100%", width: "16vw" }
                 }
               >
@@ -73,13 +73,13 @@ export default function Portfolio() {
                         ? {
                             borderRadius: "15px",
                             objectFit: "cover",
-                            minWidth: "70vw",
+                            width: "100%",
                           }
                         : {
                             borderRadius: "15px",
                             objectFit: "cover",
-                            scale: hover ? "1.1" : "1.0",
-                            transition: "0.3s",
+                            transform: hover ? "scale(1.1)" : "scale(1.0)",
+                            transition: "transform 0.3s ease",
                           }
                     }
                   />
